@@ -10,9 +10,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path="/">
-            <Welcome />
-          </Route>
+          <Route exact path="/" component={Welcome} />
           <Route path="/home">
             <p>home</p>
           </Route>
@@ -22,6 +20,7 @@ class App extends Component {
           <Route path="/register">
             <p>register</p>
           </Route>
+          {/* TODO use 404 page */}
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </div>
