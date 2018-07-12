@@ -1,5 +1,18 @@
+@import "App.css";
+@import "NavBar/NavBar.css";
+
+
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 14px;
+}
+
+* {
+  box-sizing: border-box;
 }
