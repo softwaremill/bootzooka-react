@@ -20,11 +20,11 @@ export function validatePassword(password) {
   return errors;
 }
 
-export function validateUsername(username) {
+export function validateLogin(login) {
   const errors = [];
 
-  if (username.length < 2) {
-    errors.push('at least 2 characters required!');
+  if (login.length < 3) {
+    errors.push('at least 3 characters required!');
   }
 
   return errors;

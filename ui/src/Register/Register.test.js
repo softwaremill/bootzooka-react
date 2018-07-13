@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import Register from './Register';
 
 describe('structure', () => {
-  it('should contain username input', () => {
+  it('should contain login input', () => {
     const wrapper = shallow(<Register />);
-    expect(wrapper.find('input[name="username"]').length).toBe(1);
+    expect(wrapper.find('input[name="login"]').length).toBe(1);
   });
 
   it('should contain email input', () => {
@@ -36,11 +36,11 @@ describe('behaviour', () => {
     expect(registerButton.props().disabled).toBe(true);
   });
 
-  it('an error should appear under empty username input on blur', () => {
+  it('an error should appear under empty login input on blur', () => {
     const wrapper = shallow(<Register />);
-    const usernameInput = wrapper.find('input[name="username"]');
-    usernameInput.simulate('blur');
-    expect(wrapper.contains(<p className="Register__validation-message" key={0}>at least 2 characters required!</p>)).toBe(true);
+    const loginInput = wrapper.find('input[name="login"]');
+    loginInput.simulate('blur');
+    expect(wrapper.contains(<p className="Register__validation-message" key={0}>at least 3 characters required!</p>)).toBe(true);
   });
 
   it('an error should appear under empty password input on blur', () => {
@@ -67,7 +67,7 @@ describe('behaviour', () => {
   it('should enable register button when all inputs are correct', () => {
     const wrapper = shallow(<Register />);
     const initialState = wrapper.state();
-    wrapper.setState({ ...initialState, values: { username: 'mickey', email: 'mickey@mou.se', password: 'P4sSW0Rd#1', repeatedPassword: 'P4sSW0Rd#1' } });
+    wrapper.setState({ ...initialState, values: { login: 'mickey', email: 'mickey@mou.se', password: 'P4sSW0Rd#1', repeatedPassword: 'P4sSW0Rd#1' } });
     const registerButton = wrapper.find('input[type="submit"]');
     expect(registerButton.props().disabled).toBe(false);
   });

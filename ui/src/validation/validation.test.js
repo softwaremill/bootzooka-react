@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword, validateUsername } from './validation';
+import { validateEmail, validatePassword, validateLogin } from './validation';
 
 describe('validateEmail', () => {
   it('should return an empty list when email is valid', () => {
@@ -30,17 +30,17 @@ describe('validatePassword', () => {
   });
 });
 
-describe('validateUsername', () => {
-  it('should return an empty list when username is valid', () => {
-    const username = 'OG';
-    const validationResult = validateUsername(username);
+describe('validateLogin', () => {
+  it('should return an empty list when login is valid', () => {
+    const login = 'JFK';
+    const validationResult = validateLogin(login);
     expect(validationResult.length).toBe(0);
   });
 
-  it('should return a list containing error message when username is too short', () => {
-    const username = 'M';
-    const validationResult = validateUsername(username);
+  it('should return a list containing error message when login is too short', () => {
+    const login = 'MU';
+    const validationResult = validateLogin(login);
     expect(validationResult.length).toBe(1);
-    expect(validationResult[0]).toEqual('at least 2 characters required!');
+    expect(validationResult[0]).toEqual('at least 3 characters required!');
   });
 });
