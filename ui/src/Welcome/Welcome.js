@@ -2,7 +2,7 @@ import React from 'react';
 
 const Welcome = () =>
   <div className="Welcome">
-    <h1>Hi there! Welcome to Bootzooka-react!</h1>
+    <h3>Hi there! Welcome to Bootzooka-react!</h3>
     <p>In this template application you can register as a new user, log in and later manage your user details.</p>
     <p>If you are interested in how Bootzooka-react works, you can
       <a href="http://softwaremill.github.io/bootzooka/" target="blank">browse the documentation</a>,

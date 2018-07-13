@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NotFound = () =>
   <div className="NotFound">
       <h1>Ooops!</h1>
-      <h2>You shouldn't be here for sure :)</h2>
+      <h3>You shouldn't be here for sure :)</h3>
       <div>
           Please choose one of the locations below:
       </div>
