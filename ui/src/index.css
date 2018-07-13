@@ -2,6 +2,7 @@
 @import "App.css";
 @import "NavBar/NavBar.css";
 @import "NotFound/NotFound.css";
+@import "Register/Register.css";
 @import "Welcome/Welcome.css";
 
 html, body {
