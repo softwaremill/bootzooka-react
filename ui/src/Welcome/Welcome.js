@@ -10,7 +10,7 @@ const Welcome = () =>
     </p>
     <div className="Welcome__footer">
       <h4>brought to you by</h4>
-      <a href="http://softwaremill.com" target="_blank"><img src="sml_2.png" className="sml-logo" alt="SoftwareMill"/></a>
+      <a href="http://softwaremill.com" rel="noopener noreferrer" target="_blank"><img src="sml_2.png" className="sml-logo" alt="SoftwareMill"/></a>
     </div>
   </div>;
 
