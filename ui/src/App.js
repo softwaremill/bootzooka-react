@@ -19,7 +19,7 @@ class App extends Component {
           <Route path="/login">
             <p>login</p>
           </Route>
-          <Route component={Register} />
+          <Route path="/register" component={Register} />
           <Route path="/recover-lost-password">
             <p>recover lost password</p>
           </Route>
