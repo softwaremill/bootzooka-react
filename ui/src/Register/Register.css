@@ -5,7 +5,6 @@
   margin-top: 1em;
 }
 
-
 .Register form {
   display: flex;
   align-items: center;
@@ -17,18 +16,4 @@
   .Register form {
     width: 25%;
   }
-}
-
-.Register__validation-message {
-  color: crimson;
-}
-
-input {
-  width: 100%;
-}
-
-input[type="submit"]:disabled {
-  background-color: gainsboro;
-  border-color: gainsboro;
-  cursor: not-allowed;
 }

@@ -80,20 +80,20 @@ class Register extends Component {
             <input type="text" name="login" placeholder="Login"
               onChange={({ target }) => this.handleValueChange('login', target.value)}
               onBlur={() => this.handleBlur('login')} />
-            { this.getLoginErrors().map((errorMsg, idx) => <p className="Register__validation-message" key={idx}>{errorMsg}</p>) }
+            { this.getLoginErrors().map((errorMsg, idx) => <p className="validation-message" key={idx}>{errorMsg}</p>) }
             <input type="email" name="email" placeholder="Email address"
               onChange={({ target }) => this.handleValueChange('email', target.value)}
               onBlur={() => this.handleBlur('email')} />
-            { this.getEmailErrors().map((errorMsg, idx) => <p className="Register__validation-message" key={idx}>{errorMsg}</p>) }
+            { this.getEmailErrors().map((errorMsg, idx) => <p className="validation-message" key={idx}>{errorMsg}</p>) }
             <input type="password" name="password" placeholder="Password"
               onChange={({ target }) => this.handleValueChange('password', target.value)}
               onBlur={() => this.handleBlur('password')} />
-            { this.getPasswordErrors('password').map((errorMsg, idx) => <p className="Register__validation-message" key={idx}>{errorMsg}</p>) }
+            { this.getPasswordErrors('password').map((errorMsg, idx) => <p className="validation-message" key={idx}>{errorMsg}</p>) }
             <input type="password" name="repeatedPassword" placeholder="Repeat password"
               onChange={({ target }) => this.handleValueChange('repeatedPassword', target.value)}
               onBlur={() => this.handleBlur('repeatedPassword')} />
-            { this.getPasswordErrors('repeatedPassword').map((errorMsg, idx) => <p className="Register__validation-message" key={idx}>{errorMsg}</p>) }
-            { this.state.touchedControls.repeatedPassword && !this.passwordEntriesMatch() ? <p className="Register__validation-message">passwords don't match!</p> : null }
+            { this.getPasswordErrors('repeatedPassword').map((errorMsg, idx) => <p className="validation-message" key={idx}>{errorMsg}</p>) }
+            { this.state.touchedControls.repeatedPassword && !this.passwordEntriesMatch() ? <p className="validation-message">passwords don't match!</p> : null }
             <input type="submit" value="Register" className="button-primary" disabled={!this.isValid()} />
           </form>
         </div>

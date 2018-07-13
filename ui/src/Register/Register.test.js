@@ -40,28 +40,28 @@ describe('behaviour', () => {
     const wrapper = shallow(<Register />);
     const loginInput = wrapper.find('input[name="login"]');
     loginInput.simulate('blur');
-    expect(wrapper.contains(<p className="Register__validation-message" key={0}>at least 3 characters required!</p>)).toBe(true);
+    expect(wrapper.contains(<p className="validation-message" key={0}>at least 3 characters required!</p>)).toBe(true);
   });
 
   it('an error should appear under empty password input on blur', () => {
     const wrapper = shallow(<Register />);
     const passwordInput = wrapper.find('input[name="password"]');
     passwordInput.simulate('blur');
-    expect(wrapper.contains(<p className="Register__validation-message" key={0}>at least 5 characters required!</p>)).toBe(true);
+    expect(wrapper.contains(<p className="validation-message" key={0}>at least 5 characters required!</p>)).toBe(true);
   });
 
   it('an error should appear under empty repeated password input on blur', () => {
     const wrapper = shallow(<Register />);
     const repeatedPasswordInput = wrapper.find('input[name="repeatedPassword"]');
     repeatedPasswordInput.simulate('blur');
-    expect(wrapper.contains(<p className="Register__validation-message" key={0}>at least 5 characters required!</p>)).toBe(true);
+    expect(wrapper.contains(<p className="validation-message" key={0}>at least 5 characters required!</p>)).toBe(true);
   });
 
   it('an error should appear under repeated password when passwords do not match and repeatedPassword input was touched', () => {
     const wrapper = shallow(<Register />);
     const initialState = wrapper.state();
     wrapper.setState({ touchedControls: { ...initialState.touchedControls, repeatedPassword: true}, values: { ...initialState.values, password: 'abcde', repeatedPassword: 'abcdefgh' } });
-    expect(wrapper.contains(<p className="Register__validation-message" key={0}>passwords don't match!</p>)).toBe(true);
+    expect(wrapper.contains(<p className="validation-message" key={0}>passwords don't match!</p>)).toBe(true);
   });
 
   it('should enable register button when all inputs are correct', () => {

@@ -3,6 +3,7 @@
 @import "NavBar/NavBar.css";
 @import "NotFound/NotFound.css";
 @import "Register/Register.css";
+@import "ResetPassword/ResetPassword.css";
 @import "Welcome/Welcome.css";
 
 html, body {
@@ -18,4 +19,19 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.validation-message {
+  color: crimson;
+}
+
+input {
+  width: 100%;
+}
+
+input[type="submit"]:disabled,
+input[type="submit"]:disabled:hover {
+  background-color: gainsboro;
+  border-color: gainsboro;
+  cursor: not-allowed;
 }
