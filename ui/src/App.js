@@ -22,6 +22,9 @@ class App extends Component {
           </Route>
           <Route path="/register" component={Register} />
           <Route path="/recover-lost-password" component={RecoverLostPassword} />
+          <Route path="/reset-password">
+            <p>reset password</p>
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </div>
