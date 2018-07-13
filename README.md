@@ -7,3 +7,19 @@ Bootzooka-react is a simple application scaffolding project to allow quick start
 applications with Scala and React.
 
 [See the docs](http://softwaremill.github.io/bootzooka-react/) for more information.
+
+## WARNING!
+The front-end part of this repo is still under ongoing migration to React.
+
+## TODO
+- [x] route scaffoldings
+- [x] page header (navbar)
+- [x] welcome page
+- [x] 404/not found page
+- [x] register form
+- [ ] protected route (/home)
+- [ ] login form
+- [ ] forgot password form
+- [ ] footer component
+- [ ] toast notifications for error/success/others
+- [ ] "fork me on github" badge on every screen
