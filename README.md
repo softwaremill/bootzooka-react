@@ -19,7 +19,7 @@ The front-end part of this repo is still under ongoing migration to React.
 - [x] register form
 - [ ] protected route (/home)
 - [ ] login form
-- [ ] forgot password form
+- [x] forgot password form
 - [ ] footer component
 - [ ] toast notifications for error/success/others
 - [ ] "fork me on github" badge on every screen
