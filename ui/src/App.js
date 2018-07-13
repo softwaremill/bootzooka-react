@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './NavBar/NavBar';
 import Welcome from './Welcome/Welcome';
+import NotFound from './NotFound/NotFound';
 
 class App extends Component {
   render() {
@@ -20,8 +21,7 @@ class App extends Component {
           <Route path="/register">
             <p>register</p>
           </Route>
-          {/* TODO use 404 page */}
-          <Route render={() => <Redirect to="/" />} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
