@@ -5,7 +5,7 @@ import NavBar from './NavBar/NavBar';
 import Welcome from './Welcome/Welcome';
 import NotFound from './NotFound/NotFound';
 import Register from './Register/Register';
-import ResetPassword from './ResetPassword/ResetPassword';
+import RecoverLostPassword from './RecoverLostPassword/RecoverLostPassword';
 
 class App extends Component {
   render() {
@@ -21,7 +21,7 @@ class App extends Component {
             <p>login</p>
           </Route>
           <Route path="/register" component={Register} />
-          <Route path="/recover-lost-password" component={ResetPassword} />
+          <Route path="/recover-lost-password" component={RecoverLostPassword} />
           <Route component={NotFound} />
         </Switch>
       </div>

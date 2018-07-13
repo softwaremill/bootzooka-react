@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-class ResetPassword extends Component {
+class RecoverLostPassword extends Component {
   constructor() {
     super();
     this.state = {
@@ -46,7 +46,7 @@ class ResetPassword extends Component {
   render() {
     return (
       this.state.resetComplete ? <Redirect to="/login" />
-      : <div className="ResetPassword">
+      : <div className="RecoverLostPassword">
           <form onSubmit={this.handleSubmit}>
             <input type="text" name="login" placeholder="Email address or login"
               onChange={({ target }) => this.handleValueChange('login', target.value)}
@@ -59,4 +59,4 @@ class ResetPassword extends Component {
   }
 }
 
-export default ResetPassword;
+export default RecoverLostPassword;

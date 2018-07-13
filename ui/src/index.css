@@ -3,7 +3,7 @@
 @import "NavBar/NavBar.css";
 @import "NotFound/NotFound.css";
 @import "Register/Register.css";
-@import "ResetPassword/ResetPassword.css";
+@import "RecoverLostPassword/RecoverLostPassword.css";
 @import "Welcome/Welcome.css";
 
 html, body {
