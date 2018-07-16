@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 
 class RecoverLostPassword extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       values: {
         login: ''
@@ -22,7 +21,7 @@ class RecoverLostPassword extends Component {
     event.preventDefault();
     try {
       const { login } = this.state.values;
-      const { data: response } = await axios.post('api/passwordreset', { login });
+      const { data: response } = await this.props.authService.claimPasswordReset({ login });
       if (response === 'success') {
         this.setState({ resetComplete: true });
       }

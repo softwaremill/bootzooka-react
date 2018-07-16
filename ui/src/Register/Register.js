@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { validateEmail, validateLogin, validatePassword } from '../validation/validation';
-import axios from 'axios';
 
 class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       values: {
         login: '',
@@ -19,7 +18,7 @@ class Register extends Component {
         password: false,
         repeatedPassword: false
       },
-      registered: false,
+      isRegistered: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,9 +28,9 @@ class Register extends Component {
     event.preventDefault();
     try {
       const { login, email, password } = this.state.values;
-      const { data: response } = await axios.post('api/users/register', { login, email, password });
+      const { data: response } = await this.props.authService.registerUser({ login, email, password });
       if (response === 'success') {
-        this.setState({ registered: true });
+        this.setState({ isRegistered: true });
       }
     } catch (error) {
       console.error(error);
@@ -73,7 +72,7 @@ class Register extends Component {
 
   render () {
     return (
-      this.state.registered ? <Redirect to="/login" />
+      this.state.isRegistered ? <Redirect to="/login" />
       : <div className="Register">
           <h4>Please sign up</h4>
           <form onSubmit={this.handleSubmit}>

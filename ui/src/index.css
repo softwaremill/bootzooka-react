@@ -22,6 +22,10 @@ body {
   box-sizing: border-box;
 }
 
+a {
+  cursor: pointer;
+}
+
 .validation-message {
   color: crimson;
   margin-bottom: 1em;

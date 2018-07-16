@@ -18,9 +18,11 @@ The front-end part of this repo is still under ongoing migration to React.
 - [x] 404/not found page
 - [x] register form
 - [ ] protected route (/home)
-- [ ] login form
+- [x] login form
+- [ ] profile form
 - [x] forgot password form
 - [ ] reset password form
 - [ ] footer component
 - [ ] toast notifications for error/success/others
 - [ ] "fork me on github" badge on every screen
+- [ ] propTypes

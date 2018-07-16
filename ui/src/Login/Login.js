@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       values: {
         login: '',
@@ -14,11 +14,22 @@ class Login extends Component {
         login: false,
         password: false,
       },
+      isLoggedIn: false,
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async handleSubmit(event) {
     event.preventDefault();
+    try {
+      const { login, password, rememberMe } = this.state.values;
+      const { data: userData } = await this.props.authService.login({ login, password, rememberMe });
+      this.props.onLoggedIn(userData);
+      this.setState({ isLoggedIn: true });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   handleValueChange(key, value) {
@@ -36,22 +47,23 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
-        <h4>Please sign in</h4>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" name="login" placeholder="Login"
-            onChange={({ target }) => this.handleValueChange('login', target.value)}
-            onBlur={() => this.handleBlur('login')} />
-          { this.state.touchedControls.login && this.state.values.login.length < 1 ? <p className="validation-message">login is required!</p> : null }
-          <input type="password" name="password" placeholder="Password"
-            onChange={({ target }) => this.handleValueChange('password', target.value)}
-            onBlur={() => this.handleBlur('password')} />
-          { this.state.touchedControls.password && this.state.values.password.length < 1 ? <p className="validation-message">password is required!</p> : null }
-          <Link to="/recover-lost-password">Forgot password?</Link>
-          <label><input type="checkbox" checked={this.state.values.rememberMe} onChange={({ target }) => this.handleValueChange('rememberMe', target.checked)} /> Remember me</label>
-          <input type="submit" value="Sign in" className="button-primary" disabled={!this.isValid()} />
-        </form>
-      </div>
+      this.state.isLoggedIn ? <Redirect to="/home" />
+      :  <div className="Login">
+          <h4>Please sign in</h4>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" name="login" placeholder="Login"
+              onChange={({ target }) => this.handleValueChange('login', target.value)}
+              onBlur={() => this.handleBlur('login')} />
+            { this.state.touchedControls.login && this.state.values.login.length < 1 ? <p className="validation-message">login is required!</p> : null }
+            <input type="password" name="password" placeholder="Password"
+              onChange={({ target }) => this.handleValueChange('password', target.value)}
+              onBlur={() => this.handleBlur('password')} />
+            { this.state.touchedControls.password && this.state.values.password.length < 1 ? <p className="validation-message">password is required!</p> : null }
+            <Link to="/recover-lost-password">Forgot password?</Link>
+            <label><input type="checkbox" checked={this.state.values.rememberMe} onChange={({ target }) => this.handleValueChange('rememberMe', target.checked)} /> Remember me</label>
+            <input type="submit" value="Sign in" className="button-primary" disabled={!this.isValid()} />
+          </form>
+        </div>
     );
   }
 }
