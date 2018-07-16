@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { validateEmail, validateLogin, validatePassword } from '../validation/validation';
 
 class Register extends Component {
@@ -99,5 +100,11 @@ class Register extends Component {
     );
   }
 }
+
+Register.propTypes = {
+  authService: PropTypes.shape({
+    registerUser: PropTypes.func.isRequired
+  }).isRequired
+};
 
 export default Register;

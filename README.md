@@ -25,4 +25,4 @@ The front-end part of this repo is still under ongoing migration to React.
 - [ ] footer component
 - [ ] toast notifications for error/success/others
 - [ ] "fork me on github" badge on every screen
-- [ ] propTypes
+- [x] propTypes

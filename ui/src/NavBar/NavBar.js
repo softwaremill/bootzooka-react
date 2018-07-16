@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const NavBar = ({ isLoggedIn, logout, user }) =>
   <div className="NavBar">
@@ -10,5 +11,13 @@ const NavBar = ({ isLoggedIn, logout, user }) =>
     { isLoggedIn ? <a className="NavBar__link" onClick={logout}>Logout</a>
       : <NavLink className="NavBar__link" activeClassName="NavBar__link--active" to="/login">Login</NavLink> }
   </div>;
+
+NavBar.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    login: PropTypes.string.isRequired
+  }),
+};
 
 export default NavBar;

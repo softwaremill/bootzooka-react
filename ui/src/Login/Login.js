@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   constructor(props) {
@@ -67,5 +68,11 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  authService: PropTypes.shape({
+    login: PropTypes.func.isRequired
+  }).isRequired
+};
 
 export default Login;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class RecoverLostPassword extends Component {
   constructor(props) {
@@ -57,5 +58,11 @@ class RecoverLostPassword extends Component {
     );
   }
 }
+
+RecoverLostPassword.propTypes = {
+  authService: PropTypes.shape({
+    claimPasswordReset: PropTypes.func.isRequired
+  }).isRequired
+};
 
 export default RecoverLostPassword;
