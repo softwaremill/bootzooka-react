@@ -24,5 +24,5 @@ The front-end part of this repo is still under ongoing migration to React.
 - [ ] reset password form
 - [ ] footer component
 - [ ] toast notifications for error/success/others
-- [ ] "fork me on github" badge on every screen
+- [x] "fork me on github" badge on every screen
 - [x] propTypes

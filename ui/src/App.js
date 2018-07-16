@@ -8,6 +8,7 @@ import NotFound from './NotFound/NotFound';
 import RecoverLostPassword from './RecoverLostPassword/RecoverLostPassword';
 import Register from './Register/Register';
 import Welcome from './Welcome/Welcome';
+import withForkMe from './ForkMe/ForkMe';
 
 class App extends Component {
   constructor(props) {
@@ -48,20 +49,20 @@ class App extends Component {
       <div className="App">
         <NavBar isLoggedIn={isLoggedIn} user={user} logout={this.logout.bind(this)} />
         <Switch>
-          <Route exact path="/" component={Welcome} />
+          <Route exact path="/" render={() => withForkMe(<Welcome />)} />
           <Route path="/home">
             <p>home</p>
           </Route>
           <Route path="/profile">
             <p>profile</p>
           </Route>
-          <Route path="/login" render={() => <Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)} />} />
-          <Route path="/register" render={() => <Register authService={authService} />} />
-          <Route path="/recover-lost-password" render={() => <RecoverLostPassword authService={authService} />} />
+          <Route path="/login" render={() => withForkMe(<Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)} />)} />
+          <Route path="/register" render={() => withForkMe(<Register authService={authService} />)} />
+          <Route path="/recover-lost-password" render={() => withForkMe(<RecoverLostPassword authService={authService} />)} />
           <Route path="/reset-password">
             <p>reset password</p>
           </Route>
-          <Route component={NotFound} />
+          <Route render={() => withForkMe(<NotFound />)} />
         </Switch>
       </div>
     );
