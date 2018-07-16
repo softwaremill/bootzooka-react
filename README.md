@@ -17,7 +17,7 @@ The front-end part of this repo is still under ongoing migration to React.
 - [x] welcome page
 - [x] 404/not found page
 - [x] register form
-- [ ] protected route (/home)
+- [x] protected route (/main)
 - [x] login form
 - [ ] profile form
 - [x] forgot password form
