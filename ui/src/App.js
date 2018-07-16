@@ -8,6 +8,7 @@ import NotFound from './NotFound/NotFound';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import RecoverLostPassword from './RecoverLostPassword/RecoverLostPassword';
 import Register from './Register/Register';
+import Spinner from './Spinner/Spinner';
 import Welcome from './Welcome/Welcome';
 import withForkMe from './ForkMe/ForkMe';
 import SecretMain from './SecretMain/SecretMain';
@@ -18,16 +19,18 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       user: null,
+      isLoadingAuthInfo: true
     };
   }
 
   async componentDidMount() {
     try {
-      const { data: userData } = await this.props.authService.getCurrentUser();
-      this.onLoggedIn(userData);
+      const { data: user } = await this.props.authService.getCurrentUser();
+      this.setState({ isLoggedIn: true, user, isLoadingAuthInfo: false });
     } catch (_error) {
       // user is not logged in
       // TODO the backend API should not throw in case of user not logged in - it should rather return an information about that fact.
+      this.setState({ isLoadingAuthInfo: false });
     }
   }
 
@@ -46,25 +49,24 @@ class App extends Component {
 
   render() {
     const { authService } = this.props;
-    const { isLoggedIn, user } = this.state;
+    const { isLoadingAuthInfo, isLoggedIn, user } = this.state;
     return (
-      <div className="App">
-        <NavBar isLoggedIn={isLoggedIn} user={user} logout={this.logout.bind(this)} />
-        <Switch>
-          <Route exact path="/" render={() => withForkMe(<Welcome />)} />
-          <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
-          <Route path="/profile">
-            <p>profile</p>
-          </Route>
-          <Route path="/login" render={() => withForkMe(<Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)} />)} />
-          <Route path="/register" render={() => withForkMe(<Register authService={authService} />)} />
-          <Route path="/recover-lost-password" render={() => withForkMe(<RecoverLostPassword authService={authService} />)} />
-          <Route path="/reset-password">
-            <p>reset password</p>
-          </Route>
-          <Route render={() => withForkMe(<NotFound />)} />
-        </Switch>
-      </div>
+      isLoadingAuthInfo ? <Spinner />
+      : <div className="App">
+          <NavBar isLoggedIn={isLoggedIn} user={user} logout={this.logout.bind(this)} />
+          <Switch>
+            <Route exact path="/" render={() => withForkMe(<Welcome />)} />
+            <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
+            <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile" render={() => <p>profile</p>} />
+            <Route path="/login" render={() => withForkMe(<Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)} />)} />
+            <Route path="/register" render={() => withForkMe(<Register authService={authService} />)} />
+            <Route path="/recover-lost-password" render={() => withForkMe(<RecoverLostPassword authService={authService} />)} />
+            <Route path="/reset-password">
+              <p>reset password</p>
+            </Route>
+            <Route render={() => withForkMe(<NotFound />)} />
+          </Switch>
+        </div>
     );
   }
 }

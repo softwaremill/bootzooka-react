@@ -6,6 +6,7 @@
 @import "NotFound/NotFound.css";
 @import "Register/Register.css";
 @import "RecoverLostPassword/RecoverLostPassword.css";
+@import "Spinner/Spinner.css";
 @import "Welcome/Welcome.css";
 
 html, body {
