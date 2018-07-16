@@ -48,7 +48,7 @@ class Login extends Component {
 
   render() {
     return (
-      this.state.isLoggedIn ? <Redirect to="/home" />
+      this.state.isLoggedIn ? <Redirect to="/main" />
       :  <div className="Login">
           <h4>Please sign in</h4>
           <form onSubmit={this.handleSubmit}>

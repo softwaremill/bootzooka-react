@@ -5,10 +5,12 @@ import './App.css';
 import Login from './Login/Login';
 import NavBar from './NavBar/NavBar';
 import NotFound from './NotFound/NotFound';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import RecoverLostPassword from './RecoverLostPassword/RecoverLostPassword';
 import Register from './Register/Register';
 import Welcome from './Welcome/Welcome';
 import withForkMe from './ForkMe/ForkMe';
+import SecretMain from './SecretMain/SecretMain';
 
 class App extends Component {
   constructor(props) {
@@ -50,9 +52,7 @@ class App extends Component {
         <NavBar isLoggedIn={isLoggedIn} user={user} logout={this.logout.bind(this)} />
         <Switch>
           <Route exact path="/" render={() => withForkMe(<Welcome />)} />
-          <Route path="/home">
-            <p>home</p>
-          </Route>
+          <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
           <Route path="/profile">
             <p>profile</p>
           </Route>
