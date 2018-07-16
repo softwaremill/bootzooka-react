@@ -6,6 +6,7 @@ import Welcome from './Welcome/Welcome';
 import NotFound from './NotFound/NotFound';
 import Register from './Register/Register';
 import RecoverLostPassword from './RecoverLostPassword/RecoverLostPassword';
+import Login from './Login/Login';
 
 class App extends Component {
   render() {
@@ -17,9 +18,7 @@ class App extends Component {
           <Route path="/home">
             <p>home</p>
           </Route>
-          <Route path="/login">
-            <p>login</p>
-          </Route>
+          <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/recover-lost-password" component={RecoverLostPassword} />
           <Route path="/reset-password">

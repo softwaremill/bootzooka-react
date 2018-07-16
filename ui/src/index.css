@@ -1,5 +1,6 @@
 @import "styles/skeleton.css";
 @import "App.css";
+@import "Login/Login.css";
 @import "NavBar/NavBar.css";
 @import "NotFound/NotFound.css";
 @import "Register/Register.css";
@@ -23,9 +24,13 @@ body {
 
 .validation-message {
   color: crimson;
+  margin-bottom: 1em;
 }
 
-input {
+input[type="submit"],
+input[type="text"],
+input[type="password"],
+input[type="email"] {
   width: 100%;
 }
 
