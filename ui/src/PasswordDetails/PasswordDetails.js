@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { validatePassword } from '../validation/validation';
-import { ToastContainer, toast } from 'react-toastify';
 
 class PasswordDetails extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class PasswordDetails extends Component {
     try {
       const { currentPassword, newPassword } = this.state.values;
       await this.props.authService.changePassword({ currentPassword, newPassword });
-      this.notifySuccess('Password changed!');
+      this.props.notifySuccess('Password changed!');
       this.setState({
         values: {
           currentPassword: '',
@@ -41,17 +40,9 @@ class PasswordDetails extends Component {
         },
       });
     } catch (error) {
-      this.notifyError('Could not change password!');
+      this.props.notifyError('Could not change password!');
       console.error(error);
     }
-  }
-
-  notifySuccess(msg) {
-    toast.success(msg);
-  }
-
-  notifyError(msg) {
-    toast.error(msg);
   }
 
   handleValueChange(key, value) {
@@ -99,7 +90,6 @@ class PasswordDetails extends Component {
           { this.state.touchedControls.repeatedNewPassword && !this.passwordEntriesMatch() ? <p className="validation-message">passwords don't match!</p> : null }
           <input type="submit" value="Update password" className="button-primary" disabled={!this.isValid()} />
         </form>
-        <ToastContainer />
       </div>
     );
   }
@@ -109,6 +99,8 @@ PasswordDetails.propTypes = {
   authService: PropTypes.shape({
     changePassword: PropTypes.func.isRequired
   }).isRequired,
+  notifyError: PropTypes.func.isRequired,
+  notifySuccess: PropTypes.func.isRequired,
 };
 
 export default PasswordDetails;

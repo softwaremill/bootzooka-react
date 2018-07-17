@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './Login/Login';
@@ -50,8 +51,17 @@ class App extends Component {
       await this.props.authService.logout();
       this.setState({ isLoggedIn: false, user: null });
     } catch (error) {
+      this.notifyError('Logout failed!');
       console.error(error);
     }
+  }
+
+  notifySuccess(msg) {
+    toast.success(msg);
+  }
+
+  notifyError(msg) {
+    toast.error(msg);
   }
 
   render() {
@@ -66,18 +76,30 @@ class App extends Component {
             <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
             <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile" render={() => withForkMe(
               <div>
-                <ProfileDetails user={user} authService={authService} onUserUpdated={this.updateUserInfo.bind(this)} />
-                <PasswordDetails authService={authService} />
+                <ProfileDetails user={user} authService={authService}
+                  onUserUpdated={this.updateUserInfo.bind(this)}
+                  notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                <PasswordDetails authService={authService} notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
               </div>
             )} />
-            <Route path="/login" render={() => withForkMe(<Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)} />)} />
-            <Route path="/register" render={() => withForkMe(<Register authService={authService} />)} />
-            <Route path="/recover-lost-password" render={() => withForkMe(<RecoverLostPassword authService={authService} />)} />
+            <Route path="/login" render={() => withForkMe(
+              <Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)}
+                notifyError={this.notifyError.bind(this)} />
+              )} />
+            <Route path="/register" render={() => withForkMe(
+              <Register authService={authService}
+                notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+              )} />
+            <Route path="/recover-lost-password" render={() => withForkMe(
+              <RecoverLostPassword authService={authService}
+                notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+              )} />
             <Route path="/reset-password">
               <p>reset password</p>
             </Route>
             <Route render={() => withForkMe(<NotFound />)} />
           </Switch>
+          <ToastContainer />
         </div>
     );
   }

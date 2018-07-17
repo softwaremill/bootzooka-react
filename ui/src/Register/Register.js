@@ -32,8 +32,10 @@ class Register extends Component {
       const { data: response } = await this.props.authService.registerUser({ login, email, password });
       if (response === 'success') {
         this.setState({ isRegistered: true });
+        this.props.notifySuccess('Successfully registered.');
       }
     } catch (error) {
+      this.props.notifyError('Could not register new user!');
       console.error(error);
     }
   }
@@ -104,7 +106,9 @@ class Register extends Component {
 Register.propTypes = {
   authService: PropTypes.shape({
     registerUser: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  notifyError: PropTypes.func.isRequired,
+  notifySuccess: PropTypes.func.isRequired,
 };
 
 export default Register;

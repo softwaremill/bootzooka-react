@@ -25,8 +25,10 @@ class RecoverLostPassword extends Component {
       const { data: response } = await this.props.authService.claimPasswordReset({ login });
       if (response === 'success') {
         this.setState({ resetComplete: true });
+        this.props.notifySuccess('Password reset claim success.');
       }
     } catch (error) {
+      this.props.notifyError('Could not claim password reset!');
       console.error(error);
     }
   }
@@ -62,7 +64,9 @@ class RecoverLostPassword extends Component {
 RecoverLostPassword.propTypes = {
   authService: PropTypes.shape({
     claimPasswordReset: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  notifyError: PropTypes.func.isRequired,
+  notifySuccess: PropTypes.func.isRequired,
 };
 
 export default RecoverLostPassword;

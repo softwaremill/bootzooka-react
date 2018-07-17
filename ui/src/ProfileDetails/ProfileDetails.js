@@ -26,7 +26,9 @@ class ProfileDetails extends Component {
       const { email, login } = this.state.values;
       await this.props.authService.changeProfileDetails({ login, email });
       this.props.onUserUpdated({ email, login });
+      this.props.notifySuccess('Profile details changed!');
     } catch (error) {
+      this.props.notifyError('Could not change profile details!');
       console.error(error);
     }
   }
@@ -82,6 +84,8 @@ ProfileDetails.propTypes = {
     email: PropTypes.string.isRequired,
   }),
   onUserUpdated: PropTypes.func.isRequired,
+  notifyError: PropTypes.func.isRequired,
+  notifySuccess: PropTypes.func.isRequired,
 };
 
 export default ProfileDetails;

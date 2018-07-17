@@ -29,6 +29,7 @@ class Login extends Component {
       this.props.onLoggedIn(userData);
       this.setState({ isLoggedIn: true });
     } catch (error) {
+      this.props.notifyError('Incorrect login or password!');
       console.error(error);
     }
   }
@@ -72,7 +73,8 @@ class Login extends Component {
 Login.propTypes = {
   authService: PropTypes.shape({
     login: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  notifyError: PropTypes.func.isRequired,
 };
 
 export default Login;
