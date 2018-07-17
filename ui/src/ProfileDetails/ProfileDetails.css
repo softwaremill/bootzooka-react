@@ -4,16 +4,3 @@
   flex-direction: column;
   margin-top: 1em;
 }
-
-.ProfileDetails form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 95%;
-}
-
-@media (min-width: 768px) {
-  .ProfileDetails form {
-    width: 25%;
-  }
-}

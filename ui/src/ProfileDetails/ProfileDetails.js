@@ -59,7 +59,7 @@ class ProfileDetails extends Component {
     return (
       <div className="ProfileDetails">
         <h4>Profile details</h4>
-        <form onSubmit={this.handleSubmit}>
+        <form className="CommonForm" onSubmit={this.handleSubmit}>
           <input type="text" name="login" placeholder="Login" value={login}
             onChange={({ target }) => this.handleValueChange('login', target.value)}
             onBlur={() => this.handleBlur('login')} />

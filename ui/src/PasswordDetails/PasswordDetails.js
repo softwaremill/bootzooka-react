@@ -74,7 +74,7 @@ class PasswordDetails extends Component {
     return (
       <div className="PasswordDetails">
         <h4>Password details</h4>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form className="CommonForm" onSubmit={this.handleSubmit.bind(this)}>
           <input type="password" name="currentPassword" placeholder="Current password" value={currentPassword}
             onChange={({ target }) => this.handleValueChange('currentPassword', target.value)}
             onBlur={() => this.handleBlur('currentPassword')} />

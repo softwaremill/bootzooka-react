@@ -49,7 +49,7 @@ class RecoverLostPassword extends Component {
     return (
       this.state.resetComplete ? <Redirect to="/login" />
       : <div className="RecoverLostPassword">
-          <form onSubmit={this.handleSubmit}>
+          <form className="CommonForm" onSubmit={this.handleSubmit}>
             <input type="text" name="login" placeholder="Email address or login"
               onChange={({ target }) => this.handleValueChange('login', target.value)}
               onBlur={() => this.handleBlur('login')} />

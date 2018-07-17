@@ -52,7 +52,7 @@ class Login extends Component {
       this.state.isLoggedIn ? <Redirect to="/main" />
       :  <div className="Login">
           <h4>Please sign in</h4>
-          <form onSubmit={this.handleSubmit}>
+          <form className="CommonForm" onSubmit={this.handleSubmit}>
             <input type="text" name="login" placeholder="Login"
               onChange={({ target }) => this.handleValueChange('login', target.value)}
               onBlur={() => this.handleBlur('login')} />

@@ -78,7 +78,7 @@ class Register extends Component {
       this.state.isRegistered ? <Redirect to="/login" />
       : <div className="Register">
           <h4>Please sign up</h4>
-          <form onSubmit={this.handleSubmit}>
+          <form className="CommonForm" onSubmit={this.handleSubmit}>
             <input type="text" name="login" placeholder="Login"
               onChange={({ target }) => this.handleValueChange('login', target.value)}
               onBlur={() => this.handleBlur('login')} />

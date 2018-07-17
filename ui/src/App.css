@@ -1,3 +1,16 @@
 .App {
   height: 100vh;
 }
+
+.CommonForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 95%;
+}
+
+@media (min-width: 768px) {
+  .CommonForm {
+    width: 25%;
+  }
+}
