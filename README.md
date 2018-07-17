@@ -19,7 +19,7 @@ The front-end part of this repo is still under ongoing migration to React.
 - [x] register form
 - [x] protected route (/main)
 - [x] login form
-- [ ] profile form
+- [x] profile form
 - [x] forgot password form
 - [ ] reset password form
 - [ ] footer component
