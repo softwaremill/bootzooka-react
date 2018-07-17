@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { validatePassword } from '../validation/validation';
+import { ToastContainer, toast } from 'react-toastify';
 
 class PasswordDetails extends Component {
   constructor(props) {
@@ -26,9 +27,31 @@ class PasswordDetails extends Component {
     try {
       const { currentPassword, newPassword } = this.state.values;
       await this.props.authService.changePassword({ currentPassword, newPassword });
+      this.notifySuccess('Password changed!');
+      this.setState({
+        values: {
+          currentPassword: '',
+          newPassword: '',
+          repeatedNewPassword: ''
+        },
+        touchedControls: {
+          currentPassword: false,
+          newPassword: false,
+          repeatedNewPassword: false
+        },
+      });
     } catch (error) {
+      this.notifyError('Could not change password!');
       console.error(error);
     }
+  }
+
+  notifySuccess(msg) {
+    toast.success(msg);
+  }
+
+  notifyError(msg) {
+    toast.error(msg);
   }
 
   handleValueChange(key, value) {
@@ -49,32 +72,34 @@ class PasswordDetails extends Component {
 
   isValid() {
     const { currentPassword, newPassword, repeatedNewPassword } = this.state.values;
-    return validatePassword(currentPassword).length === 0
+    return currentPassword.length > 0
     && validatePassword(newPassword).length === 0
     && validatePassword(repeatedNewPassword).length === 0
     && this.passwordEntriesMatch();
   }
 
   render() {
+    const { currentPassword, newPassword, repeatedNewPassword } = this.state.values;
     return (
       <div className="PasswordDetails">
         <h4>Password details</h4>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="password" name="currentPassword" placeholder="Current password"
+          <input type="password" name="currentPassword" placeholder="Current password" value={currentPassword}
             onChange={({ target }) => this.handleValueChange('currentPassword', target.value)}
             onBlur={() => this.handleBlur('currentPassword')} />
           { this.state.touchedControls.currentPassword && this.state.values.currentPassword.length < 1 ? <p className="validation-message">current password is required!</p> : null }
-          <input type="password" name="newPassword" placeholder="New password"
+          <input type="password" name="newPassword" placeholder="New password" value={newPassword}
             onChange={({ target }) => this.handleValueChange('newPassword', target.value)}
             onBlur={() => this.handleBlur('newPassword')} />
           { this.getPasswordErrors('newPassword').map((errorMsg, idx) => <p className="validation-message" key={idx}>{errorMsg}</p>) }
-          <input type="password" name="repeatedNewPassword" placeholder="Repeat new password"
+          <input type="password" name="repeatedNewPassword" placeholder="Repeat new password" value={repeatedNewPassword}
             onChange={({ target }) => this.handleValueChange('repeatedNewPassword', target.value)}
             onBlur={() => this.handleBlur('repeatedNewPassword')} />
           { this.getPasswordErrors('repeatedNewPassword').map((errorMsg, idx) => <p className="validation-message" key={idx}>{errorMsg}</p>) }
           { this.state.touchedControls.repeatedNewPassword && !this.passwordEntriesMatch() ? <p className="validation-message">passwords don't match!</p> : null }
           <input type="submit" value="Update password" className="button-primary" disabled={!this.isValid()} />
         </form>
+        <ToastContainer />
       </div>
     );
   }
