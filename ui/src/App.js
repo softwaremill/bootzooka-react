@@ -26,6 +26,9 @@ class App extends Component {
       user: null,
       isLoadingAuthInfo: true
     };
+
+    this.notifySuccess = this.notifySuccess.bind(this);
+    this.notifyError = this.notifyError.bind(this);
   }
 
   async componentDidMount() {
@@ -80,21 +83,21 @@ class App extends Component {
                 <div>
                   <ProfileDetails user={user} userService={userService}
                     onUserUpdated={this.updateUserInfo.bind(this)}
-                    notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
-                  <PasswordDetails userService={userService} notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                    notifyError={this.notifyError} notifySuccess={this.notifySuccess} />
+                  <PasswordDetails userService={userService} notifyError={this.notifyError} notifySuccess={this.notifySuccess} />
                 </div>
               )} />
               <Route path="/login" render={() => withForkMe(
                 <Login userService={userService} onLoggedIn={this.onLoggedIn.bind(this)}
-                  notifyError={this.notifyError.bind(this)} />
+                  notifyError={this.notifyError} />
                 )} />
               <Route path="/register" render={() => withForkMe(
                 <Register userService={userService}
-                  notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                  notifyError={this.notifyError} notifySuccess={this.notifySuccess} />
                 )} />
               <Route path="/recover-lost-password" render={() => withForkMe(
                 <RecoverLostPassword userService={userService}
-                  notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                  notifyError={this.notifyError} notifySuccess={this.notifySuccess} />
                 )} />
               <Route path="/reset-password">
                 <p>reset password</p>
