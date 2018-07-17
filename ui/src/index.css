@@ -1,6 +1,7 @@
 @import "styles/skeleton.css";
 @import "App.css";
 @import "Login/Login.css";
+@import "Footer/Footer.css";
 @import "ForkMe/ForkMe.css";
 @import "NavBar/NavBar.css";
 @import "NotFound/NotFound.css";

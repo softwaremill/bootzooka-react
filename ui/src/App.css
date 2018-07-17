@@ -1,5 +1,11 @@
 .App {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Main {
+  flex: 1;
 }
 
 .CommonForm {

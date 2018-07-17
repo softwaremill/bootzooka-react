@@ -16,6 +16,7 @@ import withForkMe from './ForkMe/ForkMe';
 import SecretMain from './SecretMain/SecretMain';
 import ProfileDetails from './ProfileDetails/ProfileDetails';
 import PasswordDetails from './PasswordDetails/PasswordDetails';
+import Footer from './Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class App extends Component {
 
   async componentDidMount() {
     try {
-      const { data: user } = await this.props.authService.getCurrentUser();
+      const { data: user } = await this.props.userService.getCurrentUser();
       this.setState({ isLoggedIn: true, user, isLoadingAuthInfo: false });
     } catch (_error) {
       // user is not logged in
@@ -48,7 +49,7 @@ class App extends Component {
 
   async logout() {
     try {
-      await this.props.authService.logout();
+      await this.props.userService.logout();
       this.setState({ isLoggedIn: false, user: null });
     } catch (error) {
       this.notifyError('Logout failed!');
@@ -65,40 +66,43 @@ class App extends Component {
   }
 
   render() {
-    const { authService } = this.props;
+    const { userService, versionService } = this.props;
     const { isLoadingAuthInfo, isLoggedIn, user } = this.state;
     return (
       isLoadingAuthInfo ? <Spinner />
       : <div className="App">
           <NavBar isLoggedIn={isLoggedIn} user={user} logout={this.logout.bind(this)} />
-          <Switch>
-            <Route exact path="/" render={() => withForkMe(<Welcome />)} />
-            <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
-            <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile" render={() => withForkMe(
-              <div>
-                <ProfileDetails user={user} authService={authService}
-                  onUserUpdated={this.updateUserInfo.bind(this)}
+          <div className="Main">
+            <Switch>
+              <Route exact path="/" render={() => withForkMe(<Welcome />)} />
+              <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
+              <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile" render={() => withForkMe(
+                <div>
+                  <ProfileDetails user={user} userService={userService}
+                    onUserUpdated={this.updateUserInfo.bind(this)}
+                    notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                  <PasswordDetails userService={userService} notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                </div>
+              )} />
+              <Route path="/login" render={() => withForkMe(
+                <Login userService={userService} onLoggedIn={this.onLoggedIn.bind(this)}
+                  notifyError={this.notifyError.bind(this)} />
+                )} />
+              <Route path="/register" render={() => withForkMe(
+                <Register userService={userService}
                   notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
-                <PasswordDetails authService={authService} notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
-              </div>
-            )} />
-            <Route path="/login" render={() => withForkMe(
-              <Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)}
-                notifyError={this.notifyError.bind(this)} />
-              )} />
-            <Route path="/register" render={() => withForkMe(
-              <Register authService={authService}
-                notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
-              )} />
-            <Route path="/recover-lost-password" render={() => withForkMe(
-              <RecoverLostPassword authService={authService}
-                notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
-              )} />
-            <Route path="/reset-password">
-              <p>reset password</p>
-            </Route>
-            <Route render={() => withForkMe(<NotFound />)} />
-          </Switch>
+                )} />
+              <Route path="/recover-lost-password" render={() => withForkMe(
+                <RecoverLostPassword userService={userService}
+                  notifyError={this.notifyError.bind(this)} notifySuccess={this.notifySuccess.bind(this)} />
+                )} />
+              <Route path="/reset-password">
+                <p>reset password</p>
+              </Route>
+              <Route render={() => withForkMe(<NotFound />)} />
+            </Switch>
+          </div>
+          <Footer versionService={versionService} />
           <ToastContainer />
         </div>
     );
@@ -106,7 +110,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  authService: PropTypes.shape({
+  userService: PropTypes.shape({
     logout: PropTypes.func.isRequired,
     getCurrentUser: PropTypes.func.isRequired,
   }).isRequired
