@@ -29,7 +29,7 @@ class Register extends Component {
     event.preventDefault();
     try {
       const { login, email, password } = this.state.values;
-      const { data: response } = await this.props.authService.registerUser({ login, email, password });
+      const { data: response } = await this.props.userService.registerUser({ login, email, password });
       if (response === 'success') {
         this.setState({ isRegistered: true });
         this.props.notifySuccess('Successfully registered.');
@@ -104,7 +104,7 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  authService: PropTypes.shape({
+  userService: PropTypes.shape({
     registerUser: PropTypes.func.isRequired
   }).isRequired,
   notifyError: PropTypes.func.isRequired,

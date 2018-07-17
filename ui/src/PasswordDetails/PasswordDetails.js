@@ -25,7 +25,7 @@ class PasswordDetails extends Component {
     event.preventDefault();
     try {
       const { currentPassword, newPassword } = this.state.values;
-      await this.props.authService.changePassword({ currentPassword, newPassword });
+      await this.props.userService.changePassword({ currentPassword, newPassword });
       this.props.notifySuccess('Password changed!');
       this.setState({
         values: {
@@ -96,7 +96,7 @@ class PasswordDetails extends Component {
 }
 
 PasswordDetails.propTypes = {
-  authService: PropTypes.shape({
+  userService: PropTypes.shape({
     changePassword: PropTypes.func.isRequired
   }).isRequired,
   notifyError: PropTypes.func.isRequired,

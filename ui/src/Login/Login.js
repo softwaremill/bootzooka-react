@@ -25,7 +25,7 @@ class Login extends Component {
     event.preventDefault();
     try {
       const { login, password, rememberMe } = this.state.values;
-      const { data: userData } = await this.props.authService.login({ login, password, rememberMe });
+      const { data: userData } = await this.props.userService.login({ login, password, rememberMe });
       this.props.onLoggedIn(userData);
       this.setState({ isLoggedIn: true });
     } catch (error) {
@@ -71,7 +71,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  authService: PropTypes.shape({
+  userService: PropTypes.shape({
     login: PropTypes.func.isRequired
   }).isRequired,
   notifyError: PropTypes.func.isRequired,

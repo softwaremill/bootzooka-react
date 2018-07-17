@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class AuthService {
+class UserService {
   registerUser({ login, email, password }) {
     return axios.post('api/users/register', { login, email, password });
   }
@@ -30,4 +30,4 @@ class AuthService {
   }
 }
 
-export default AuthService;
+export default UserService;

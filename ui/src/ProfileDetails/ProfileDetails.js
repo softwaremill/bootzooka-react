@@ -24,7 +24,7 @@ class ProfileDetails extends Component {
     event.preventDefault();
     try {
       const { email, login } = this.state.values;
-      await this.props.authService.changeProfileDetails({ login, email });
+      await this.props.userService.changeProfileDetails({ login, email });
       this.props.onUserUpdated({ email, login });
       this.props.notifySuccess('Profile details changed!');
     } catch (error) {
@@ -76,7 +76,7 @@ class ProfileDetails extends Component {
 }
 
 ProfileDetails.propTypes = {
-  authService: PropTypes.shape({
+  userService: PropTypes.shape({
     changeProfileDetails: PropTypes.func.isRequired
   }).isRequired,
   user: PropTypes.shape({
