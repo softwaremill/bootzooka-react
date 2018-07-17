@@ -20,6 +20,14 @@ class AuthService {
   getCurrentUser() {
     return axios.get('api/users');
   }
+
+  changeProfileDetails({ email, login }) {
+    return axios.patch('api/users', { email, login });
+  }
+
+  changePassword({ currentPassword, newPassword }) {
+    return axios.post('api/users/changepassword', { currentPassword, newPassword });
+  }
 }
 
 export default AuthService;

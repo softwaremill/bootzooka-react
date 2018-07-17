@@ -12,6 +12,8 @@ import Spinner from './Spinner/Spinner';
 import Welcome from './Welcome/Welcome';
 import withForkMe from './ForkMe/ForkMe';
 import SecretMain from './SecretMain/SecretMain';
+import ProfileDetails from './ProfileDetails/ProfileDetails';
+import PasswordDetails from './PasswordDetails/PasswordDetails';
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +34,10 @@ class App extends Component {
       // TODO the backend API should not throw in case of user not logged in - it should rather return an information about that fact.
       this.setState({ isLoadingAuthInfo: false });
     }
+  }
+
+  updateUserInfo({ email, login }) {
+    this.setState(state => ({ ...state, user: { ...state.user, email, login } }));
   }
 
   onLoggedIn(user) {
@@ -57,7 +63,12 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => withForkMe(<Welcome />)} />
             <ProtectedRoute isLoggedIn={isLoggedIn} path="/main" component={SecretMain} />
-            <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile" render={() => <p>profile</p>} />
+            <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile" render={() => withForkMe(
+              <div>
+                <ProfileDetails user={user} authService={authService} onUserUpdated={this.updateUserInfo.bind(this)} />
+                <PasswordDetails authService={authService} />
+              </div>
+            )} />
             <Route path="/login" render={() => withForkMe(<Login authService={authService} onLoggedIn={this.onLoggedIn.bind(this)} />)} />
             <Route path="/register" render={() => withForkMe(<Register authService={authService} />)} />
             <Route path="/recover-lost-password" render={() => withForkMe(<RecoverLostPassword authService={authService} />)} />
