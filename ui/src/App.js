@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from './Login/Login';
 import NavBar from './NavBar/NavBar';
 import NotFound from './NotFound/NotFound';
