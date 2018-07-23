@@ -17,6 +17,7 @@ import SecretMain from './SecretMain/SecretMain';
 import ProfileDetails from './ProfileDetails/ProfileDetails';
 import PasswordDetails from './PasswordDetails/PasswordDetails';
 import Footer from './Footer/Footer';
+import PasswordReset from './PasswordReset/PasswordReset';
 
 class App extends Component {
   constructor(props) {
@@ -99,9 +100,10 @@ class App extends Component {
                 <RecoverLostPassword userService={userService}
                   notifyError={this.notifyError} notifySuccess={this.notifySuccess} />
                 )} />
-              <Route path="/reset-password">
-                <p>reset password</p>
-              </Route>
+              <Route path="/password-reset" render={({ location }) => withForkMe(
+                <PasswordReset userService={userService} queryParamsString={location.search}
+                  notifyError={this.notifyError} notifySuccess={this.notifySuccess} />
+              )} />
               <Route render={() => withForkMe(<NotFound />)} />
             </Switch>
           </div>

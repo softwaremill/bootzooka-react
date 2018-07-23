@@ -6,6 +6,7 @@
 @import "NavBar/NavBar.css";
 @import "NotFound/NotFound.css";
 @import "PasswordDetails/PasswordDetails.css";
+@import "PasswordReset/PasswordReset.css";
 @import "ProfileDetails/ProfileDetails.css";
 @import "Register/Register.css";
 @import "RecoverLostPassword/RecoverLostPassword.css";

@@ -21,8 +21,9 @@ The front-end part of this repo is still under ongoing migration to React.
 - [x] login form
 - [x] profile form
 - [x] forgot password form
-- [ ] reset password form
+- [x] reset password form
 - [x] footer component
 - [x] toast notifications for error/success/others
 - [x] "fork me on github" badge on every screen
 - [x] propTypes
+- [ ] fix UI/selenium tests

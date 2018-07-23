@@ -28,6 +28,10 @@ class UserService {
   changePassword({ currentPassword, newPassword }) {
     return axios.post('api/users/changepassword', { currentPassword, newPassword });
   }
+
+  resetPassword({ code, password }) {
+    return axios.post(`api/passwordreset/${code}`, { code, password });
+  }
 }
 
 export default UserService;
